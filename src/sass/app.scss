@@ -1,5 +1,12 @@
+$backgroundColor: #fff;
+$textColor: #000000;
+$grey: #B8B8B8;
+
 body {
-	background-color: #6FCCDD;
+	background-image:("");
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-color:$backgroundColor;
 
 	.card {
 		background-color: #70BF58;
@@ -36,4 +43,24 @@ body {
 			}
 		}
 	}
+}
+
+body, html {
+	min-height:100%;
+}
+.top-header {
+	width:100%;
+	font:6em "", cursive;
+	color:$grey;
+	text-shadow:3px 3px 3 rgba(0,0,.2);
+	margin:50px auto;
+	text-align:center;
+}
+#navigation {
+	border:2px solid $grey;
+	padding:20px;
+	width:220px;
+	max-width:200px;
+	height:800px;
+	border-radius:5px;
 }
