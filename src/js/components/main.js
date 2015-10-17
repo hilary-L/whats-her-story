@@ -204,6 +204,7 @@ var Main = React.createClass({
 					}
 				});
 				console.log(this.state.mode);
+				break;
 			default:
 				return true;
 		}
@@ -222,7 +223,7 @@ var Main = React.createClass({
 
 		return (
 			<div>
-				<div className={this.state.inputMode ? 'container' : 'container hidden'}>
+				<div className={this.state.mode.inputMode ? 'container' : 'container hidden'}>
 					<StoryBoard storyDisplay={this.state.storyDisplay} storyProperties={this.state.storyProperties} storyVisible={this.state.storyVisible} />
 					<div className="view-container">
 						<div className={this.state.inputPage.pageOne ? 'card' : 'hidden card'}>
