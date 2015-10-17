@@ -22,7 +22,7 @@ var Main = React.createClass({
 					envelope: '',
 					present: '',
 					personChoice: '',
-					outcome: 
+					outcome: '',
 				},
 				inputPage: {
 					pageOne: true,
@@ -323,7 +323,7 @@ var Main = React.createClass({
 					</div>
 					<div className={this.state.storyMode.pageTwoRight ? 'card' : 'hidden card'}>
 						<p>In this room, the {this.state.storyProperties.rightRoom}, there are two people. One is mean and one is nice - but who is who?! Well maybe you can figure it out. One is {this.state.storyProperties.nicePerson} and one is {this.state.storyProperties.meanPerson}.</p>
-						<p>Which do you choose? Type in thier name <input type='text' onChange={this.handleStoryChoice.bind(null, 'person')} value={this.state.storyProperties.personChoice} ref='person'></input></p>
+						<p>Which do you choose? Type in their name <input type='text' onChange={this.handleStoryChoice.bind(null, 'person')} value={this.state.storyProperties.personChoice} ref='person'></input></p>
 					</div>
 					<div className={this.state.storyMode.meanPerson ? 'card' : 'hidden card'}>
 						<p>Uh-oh, that is the mean person!  They hand you an envelope.  You suspect it is filled with poison but you open it anyways.  Inside is {this.state.storyProperties.envelope}.</p>
