@@ -22,7 +22,7 @@ var Main = React.createClass({
 					envelope: '',
 					present: '',
 					personChoice: '',
-					outcome: 
+					outcome: ''
 				},
 				inputPage: {
 					pageOne: true,
@@ -52,7 +52,8 @@ var Main = React.createClass({
 				},
 
 				mode: {
-					inputMode: true,
+					splashScreen: true,
+					inputMode: false,
 					storyMode: false
 				},
 				storyChoices: {
@@ -111,6 +112,17 @@ var Main = React.createClass({
 
 
 
+	},
+
+	handleSplashClick: function() {
+		var mode = this.state.mode;
+
+		mode.splashScreen = false;
+		mode.inputMode = true;
+
+		this.setState({
+			mode: mode
+		})
 	},
 
 	handleStoryChoice: function(choice, page) {
@@ -266,7 +278,9 @@ var Main = React.createClass({
 		// 
 
 		return (
+
 			<div>
+				<div onClick={this.handleSplashClick} className={this.state.mode.splashScreen ? 'container splash' : 'container hidden'}></div>
 				<div className={this.state.mode.inputMode ? 'container' : 'container hidden'}>
 					<StoryBoard storyDisplay={this.state.storyDisplay} storyProperties={this.state.storyProperties} storyVisible={this.state.storyVisible} />
 					<div className="view-container">

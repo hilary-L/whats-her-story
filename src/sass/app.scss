@@ -31,6 +31,13 @@ body, html, app, .card.big, .card-block, .card {
 .container {
 	padding: 2rem;
 
+	&.splash {
+		background-image: url('/images/logo.svg');
+		background-color: white;
+		background-repeat: no-repeat;
+		height: 500px;
+	}
+
 	.view-container {
 		display: flex;
 		flex: 1;
