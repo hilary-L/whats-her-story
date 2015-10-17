@@ -7,9 +7,16 @@ var watchify = require('watchify');
 var babelify = require('babelify');
 var streamify = require('gulp-streamify');
 var compass = require('gulp-compass');
+var open = require('gulp-open');
+var connect = require('gulp-connect');
+require('colors');
+
+var port = 8080;
 
 var path = {
 	HTML: 'src/index.html',
+	CSS: 'src/css/*.css',
+	JS: 'src/js/*.js',
 	SASS: 'src/sass/app.scss',
 	MINIFIED_OUT: 'build.min.js',
 	OUT: 'build.js',
@@ -23,7 +30,11 @@ var path = {
 gulp.task('copy', function() {
 	gulp.src(path.HTML)
 		.pipe(gulp.dest(path.DEST));
-	});
+	gulp.src(path.CSS)
+		.pipe(gulp.dest(path.DEST_CSS));
+	gulp.src(path.JS)
+		.pipe(gulp.dest(path.DEST_BUILD));
+});
 
 gulp.task('watch', function() {
 	gulp.watch(path.HTML, ['copy']);
@@ -47,6 +58,15 @@ gulp.task('watch', function() {
 	.pipe(gulp.dest(path.DEST_SRC));
 });
 
+gulp.task('connect', function() {
+  connect.server({
+    livereload: true,
+    root: 'public',
+    port: port
+  });
+  console.log(('WhatsHerStory listening on port ' + port).rainbow);
+});
+
 gulp.task('compass', function() {
 
 	gulp.src('./src/sass/*.scss')
@@ -59,7 +79,7 @@ gulp.task('compass', function() {
 
 });
 
-gulp.task('default', ['watch', 'compass']);
+gulp.task('default', ['copy', 'watch', 'compass', 'connect', 'open']);
 
 gulp.task('build', function() {
 	browserify({
@@ -70,6 +90,11 @@ gulp.task('build', function() {
 	.pipe(source(path.MINIFIED_OUT))
 	.pipe(streamify(uglify(path.MINIFIED_OUT)))
 	.pipe(gulp.dest(path.DEST_BUILD));
+});
+
+gulp.task('open', function(){
+	gulp.src(__filename)
+  		.pipe(open({uri: 'http://localhost:' + port}));
 });
 
 gulp.task('replaceHTML', function() {
