@@ -47,6 +47,10 @@ body, html, app, .card.big, .card-block, .card {
 		}
 	}
 }
+pre{
+	max-width: 100%;
+    word-wrap: break-word;
+}
 
 body, html {
 	min-height:100%;
@@ -62,9 +66,11 @@ body, html {
 .prettyprint{
 	background:white;
 }
-pre span.pun:only-child{
-	&:after{
-		content:'';
-		display:block;
+pre span.pun{
+	&:only-child, &:last-child{
+		&:after{
+			content:'';
+			display:block;
+		}
 	}
 }
