@@ -26,6 +26,6 @@
     "jest": "latest",
     "jsx-loader": "^0.13.2",
     "object-assign": "latest",
-    "react": "^0.13.3",
+    "react": "^0.13.3"
   }
 }
