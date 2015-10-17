@@ -52,6 +52,18 @@ var Main = React.createClass({
 				mode: {
 					inputMode: true,
 					storyMode: false
+				},
+				storyChoices {
+					choiceOne: ''
+				},
+				storyMode {
+					pageOne: true,
+					pageTwoLeft: false,
+					pageTwoRight: false,
+					obstacleBeat: false,
+					obstacleFailed: false,
+					pageThree: false,
+					pageFour: false
 				}
 
 				}
@@ -97,6 +109,50 @@ var Main = React.createClass({
 
 	},
 
+	handleStoryChoice: function(choice, page) {
+
+		var choiceString = ''
+		var storyMode = {};
+
+
+		switch(choice) {
+			case 'left':
+				storyMode[page] = true;
+
+				this.setState({
+					storyMode: storyMode
+				});
+				break;
+			case 'right':
+				storyMode[page] = true;
+
+				this.setState({
+					storyMode: storyMode
+				});
+				break;
+			case 'obstacle':
+				var success = Math.floor(Math.random() * 2);
+				if(success == 1) {
+					storyMode[obstacleBeat] = true;
+					this.setState({
+						storyMode: storyMode
+					});
+				}
+				else {
+					storyMode[obstacleFailed] = true;
+					this.setState({
+						storyMode: storyMode
+					});
+				}
+				break;
+			case default: 
+				return true;
+
+		}
+
+	},
+
+
 	populatePage: function(page) {
 
 		switch(page) {
@@ -140,6 +196,14 @@ var Main = React.createClass({
 					storyVisible: storyVisible
 				});
 				break;
+			case 'pageSix':
+				this.setState({
+					mode: {
+						inputMode: false,
+						storyMode: true
+					}
+				});
+				console.log(this.state.mode);
 			default:
 				return true;
 		}
@@ -155,8 +219,6 @@ var Main = React.createClass({
 		// inputObject[nameSentFromInputBind] = the contents of the input //
 		// 
 		// 
-		
-		console.log(this.state.storyDisplay.pageOne);
 
 		return (
 			<div>
@@ -205,7 +267,31 @@ var Main = React.createClass({
 						<CodeBoard codeDisplay={this.state.codeDisplay} storyProperties={this.state.storyProperties} />
 					</div>
 				</div>
-				<div className={this.state.storyMode ? 'container' : 'container hidden'}>
+				<div className={this.state.mode.storyMode ? 'container' : 'container hidden'}>
+					<div className={this.state.storyMode.pageOne ? 'card' : 'hidden card'}>
+						<p>Your name is {this.state.storyProperties.name} and you are seeking {this.state.storyProperties.lookingFor}</p>
+						<p>There are rooms to your left and your right. To the left is {this.state.storyProperties.leftRoom} and to the right is {this.state.storyProperties.rightRoom}</p>
+						<p>Which way do you choose?</p>
+						<p><button className="btn btn-primary" onClick={this.handleStoryChoice.bind(null, 'left', 'pageTwoLeft')}>Left</button><button className="btn btn-primary" onClick={this.handleStoryChoice.bind(null, 'right', 'pageTwoRight')}>Right</button></p>
+					</div>
+					<div className={this.state.storyMode.pageTwoLeft ? 'card' : 'hidden card'}>
+						<p>Congrats you are now in the {this.state.storyProperties.leftRoom}. Here you find a {this.state.storyProperties.obstacle}.</p>
+						<p>Click the button to see if you beat the obstacle! <button className="btn btn-primary" onClick={this.handleStoryChoice.bind(null, 'obstacle', 'pageThree')}>Find out</button></p>
+					</div>
+					<div className={this.state.storyMode.obstacleBeat ? 'card' : 'hidden card'}>
+						<p>OBSTACLE BEAT</p>
+					</div>
+					<div className={this.state.storyMode.obstacleFailed ? 'card' : 'hidden card'}>
+						<p>OBSTACLE FAILED</p>
+					<div className={this.state.storyMode.pageTwoRight ? 'card' : 'hidden card'}>
+						<p>Congrats you are now in the {this.state.storyProperties.rightRoom}
+					</div>
+					<div className={this.state.storyMode.pageThreeLeft ? 'card' : 'hidden card'}>
+					</div>
+					<div className={this.state.storyMode.pageThreeRight ? 'card' : 'hidden card'}>
+					</div>
+					<div className={this.state.storyMode.pageFourLeft ? 'card' : 'hidden card'}>
+					</div>
 				</div>
 			</div>
 
