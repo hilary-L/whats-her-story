@@ -19,6 +19,14 @@ var CodeBoard = React.createClass({
 					<p>{'var treasure = '} {this.props.storyProperties.treasure}</p>
 					<p>{'var cave = '} {this.props.storyProperties.cave}</p>
 				</pre>
+				<pre className={this.props.codeDisplay.fourthBlock ? 'codeblock' : 'codeblock hidden'}>
+					<p>{'var meanPerson = '} {this.props.storyProperties.meanPerson}</p>
+					<p>{'var nicePerson = '} {this.props.storyProperties.nicePerson}</p>
+				</pre>
+				<pre className={this.props.codeDisplay.fifthBlock ? 'codeblock' : 'codeblock hidden'}>
+					<p>{'var envelope = '} {this.props.storyProperties.envelope}</p>
+					<p>{'var present = '} {this.props.storyProperties.present}</p>
+				</pre>
 			</div>
 
 		)

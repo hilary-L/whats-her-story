@@ -17,7 +17,7 @@ var Main = React.createClass({
 					obstacle: '',
 					treasure: '',
 					cave: '',
-					// meanPerson: '',
+					meanPerson: '',
 					nicePerson: '',
 					envelope: '',
 					present: ''
