@@ -21,7 +21,8 @@ var Main = React.createClass({
 					nicePerson: '',
 					envelope: '',
 					present: '',
-					personChoice: ''
+					personChoice: '',
+					outcome: 
 				},
 				inputPage: {
 					pageOne: true,
@@ -63,6 +64,8 @@ var Main = React.createClass({
 					pageTwoRight: false,
 					obstacleBeat: false,
 					obstacleFailed: false,
+					meanPerson: false,
+					nicePerson: false,
 					pageThree: false,
 					pageFour: false
 				}
@@ -114,6 +117,7 @@ var Main = React.createClass({
 
 		var choiceString = ''
 		var storyMode = {};
+		var storyProperties = this.state.storyProperties;
 
 
 		switch(choice) {
@@ -135,9 +139,22 @@ var Main = React.createClass({
 				var success = Math.floor(Math.random() * 2);
 				if(success == 1) {
 					storyMode.obstacleBeat = true;
-					this.setState({
-						storyMode: storyMode
-					});
+
+					if(this.state.storyProperties.treasure == this.state.storyProperties.lookingFor) {
+						storyProperties.outcome = true;
+						this.setState({
+							storyMode: storyMode,
+							storyProperties: storyProperties
+						});
+					}
+					else {
+						storyProperties.outcome = false;
+						this.setState({
+							storyMode: storyMode,
+							storyProperties: storyProperties
+						});
+					}
+					
 				}
 				else {
 					storyMode.obstacleFailed = true;
@@ -147,24 +164,28 @@ var Main = React.createClass({
 				}
 				break;
 			case 'person':
-				console.log(this.state);
-				console.log('The nice person: ' + this.state.storyProperties.nicePerson);
-				console.log('The mean person: ' + this.state.storyProperties.meanPerson);
 				var personChoice = React.findDOMNode(this.refs.person).value.trim();
-				console.log('Your input: ' + personChoice);
 
 				var storyProperties = this.state.storyProperties;
+
 				storyProperties.personChoice = personChoice;
-				
+
 				this.setState({
 					storyProperties: storyProperties
 				});
-				console.log(this.state.storyProperties.personChoice);
+
 				if(personChoice == this.state.storyProperties.nicePerson) {
-					console.log("the nice person!");
+					storyMode.nicePerson = true;
+					this.setState({
+						storyMode: storyMode
+					});
+			
 				}
 				else if(personChoice == this.state.storyProperties.meanPerson) {
-					console.log("the mean person!");
+					storyMode.meanPerson = true;
+					this.setState({
+						storyMode: storyMode
+					});
 				}
 				break;
 			default: 
@@ -181,7 +202,7 @@ var Main = React.createClass({
 			case 'pageTwo':
 				var storyDisplay = this.state.storyDisplay;
 				var storyVisible = this.state.storyVisible;
-				storyDisplay[page] = 'Your name is ' + this.state.storyProperties.name + ' and you seek ' + this.state.storyProperties.lookingFor;
+				storyDisplay[page] = 'Your name is ' + this.state.storyProperties.name + ' and you seek ' + this.state.storyProperties.lookingFor + '.';
 				storyVisible[page] = true;
 				this.setState({
 					storyDisplay: storyDisplay,
@@ -189,9 +210,10 @@ var Main = React.createClass({
 				});
 				break;
 			case 'pageThree':
+				console.log('page three!');
 				var storyDisplay = this.state.storyDisplay;
 				var storyVisible = this.state.storyVisible;
-				storyDisplay[page] = 'There are rooms to your left and your right. To your left is ' + this.state.storyProperties.leftRoom + ' and to the right is ' + this.state.storyProperties.rightRoom;
+				storyDisplay[page] = 'There are rooms to your left and your right. To your left is ' + this.state.storyProperties.leftRoom + ' and to the right is ' + this.state.storyProperties.rightRoom + '.';
 				storyVisible[page] = true;
 				this.setState({
 					storyDisplay: storyDisplay,
@@ -201,7 +223,7 @@ var Main = React.createClass({
 			case 'pageFour':
 				var storyDisplay = this.state.storyDisplay;
 				var storyVisible = this.state.storyVisible;
-				storyDisplay[page] = 'What we say on page 4';
+				storyDisplay[page] = 'In the ' + this.state.storyProperties.leftRoom + ' is ' + this.state.storyProperties.obstacle + '. ' + 'It is guarding a treasure chest that has ' + this.state.storyProperties.treasure + ' in it. In the cave there is ' + this.state.storyProperties.cave + '.';
 				storyVisible[page] = true;
 				this.setState({
 					storyDisplay: storyDisplay,
@@ -211,7 +233,7 @@ var Main = React.createClass({
 			case 'pageFive':
 				var storyDisplay = this.state.storyDisplay;
 				var storyVisible = this.state.storyVisible;
-				storyDisplay[page] = 'What we say on page 5';
+				storyDisplay[page] = 'In the ' + this.state.storyProperties.rightRoom + ' there are ' + this.state.storyProperties.meanPerson + ' and ' + this.state.storyProperties.nicePerson + '. In the mean person\'s envelop is ' + this.state.storyProperties.envelope + '. The nice person\'s present is ' + this.state.storyProperties.present + '.';
 				storyVisible[page] = true;
 				this.setState({
 					storyDisplay: storyDisplay,
@@ -269,11 +291,12 @@ var Main = React.createClass({
 							<p>Okay, let us go back to the door on the right.  Behind that door, {this.state.storyProperties.rightRoom}, there are two people, one mean and one nice.</p>
 							<p>Who is the mean person? <input type="text" value={this.state.storyProperties.meanPerson} onChange={this.handleInput.bind(null, 'meanPerson', 'fourthBlock')}></input></p>
 							<p>Who is the nice person? <input type="text" value={this.state.storyProperties.nicePerson} onChange={this.handleInput.bind(null, 'nicePerson', 'fourthBlock')}></input></p>
+							<p>If you talk to the mean person, they hand you an envelope.  You suspect it is full of poison, but just to be sure you open it.  What is inside?  <input type="text" value={this.state.storyProperties.envelope} onChange={this.handleInput.bind(null, 'envelope', 'fifthBlock')}></input></p>
+							<p>If you talk to the nice person, they are delighted to see you!  They give you a present.  What is in the present?  <input type="text" value={this.state.storyProperties.present} onChange={this.handleInput.bind(null, 'present', 'fifthBlock')}></input></p>
 							<a onClick={this.handleChangePage.bind(null, 'pageFive')} className="btn btn-primary">Next</a>	
 						</div>
 						<div className={this.state.inputPage.pageFive ? 'card' : 'hidden card'}>
-							<p>If you talk to the mean person, they hand you an envelope.  You suspect it is full of poison, but just to be sure you open it.  What is inside?  <input type="text" value={this.state.storyProperties.envelope} onChange={this.handleInput.bind(null, 'envelope', 'fifthBlock')}></input></p>
-							<p>If you talk to the nice person, they are delighted to see you!  They give you a present.  What is in the present?  <input type="text" value={this.state.storyProperties.present} onChange={this.handleInput.bind(null, 'present', 'fifthBlock')}></input></p>
+							<p>Click to see your story!</p>
 							<a onClick={this.handleChangePage.bind(null, 'pageSix')} className="btn btn-primary">Next</a>	
 						</div>
 						<CodeBoard codeDisplay={this.state.codeDisplay} storyProperties={this.state.storyProperties} />
@@ -284,14 +307,16 @@ var Main = React.createClass({
 						<p>Your name is {this.state.storyProperties.name} and you are seeking {this.state.storyProperties.lookingFor}</p>
 						<p>There are rooms to your left and your right. To the left is {this.state.storyProperties.leftRoom} and to the right is {this.state.storyProperties.rightRoom}</p>
 						<p>Which way do you choose?</p>
-						<p><button className="btn btn-primary" onClick={this.handleStoryChoice.bind(null, 'left', 'pageTwoLeft')}>Left</button><button className="btn btn-primary" onClick={this.handleStoryChoice.bind(null, 'right', 'pageTwoRight')}>Right</button></p>
+						<p><button className="btn btn-primary" onClick={this.handleStoryChoice.bind(null, 'left', 'pageTwoLeft')}>Left</button> <button className="btn btn-primary" onClick={this.handleStoryChoice.bind(null, 'right', 'pageTwoRight')}>Right</button></p>
 					</div>
 					<div className={this.state.storyMode.pageTwoLeft ? 'card' : 'hidden card'}>
 						<p>Congrats you are now in the {this.state.storyProperties.leftRoom}. Here you find a {this.state.storyProperties.obstacle}.</p>
 						<p>Click the button to see if you beat the obstacle! <button className="btn btn-primary" onClick={this.handleStoryChoice.bind(null, 'obstacle', 'pageThree')}>Find out</button></p>
 					</div>
 					<div className={this.state.storyMode.obstacleBeat ? 'card' : 'hidden card'}>
-						<p>Congrats, you defeated the obstacle!  You were magically transported to a castle.  There you found a treasure chest, and in the treasure chest was {this.state.storyProperties.treasure}</p>
+						<p>Congrats, you defeated the obstacle!  You were magically transported to a castle.  There you found a treasure chest, and in the treasure chest was {this.state.storyProperties.treasure}.</p>
+						<p className={this.state.storyProperties.outcome ? 'paragraph' : 'paragraph hidden'}>HELL YEAH YOU FOUND WHAT YOU SOUGHT.  GOOD JOB {this.state.storyProperties.name}.</p>
+						<p className={this.state.storyProperties.outcome ? 'paragraph hidden' : ''}>Oh well.  Your mother still loves you.  Besides, you still got {this.state.storyProperties.treasure}.</p>
 					</div>
 					<div className={this.state.storyMode.obstacleFailed ? 'card' : 'hidden card'}>
 						<p>You did not defeat the obstacle.  Instead you were transported to the bottom of the sea, where you saw a glowing cave.  There might still be something cool in the cave, though.  And it was... {this.state.storyProperties.cave}</p>
@@ -300,9 +325,11 @@ var Main = React.createClass({
 						<p>In this room, the {this.state.storyProperties.rightRoom}, there are two people. One is mean and one is nice - but who is who?! Well maybe you can figure it out. One is {this.state.storyProperties.nicePerson} and one is {this.state.storyProperties.meanPerson}.</p>
 						<p>Which do you choose? Type in thier name <input type='text' onChange={this.handleStoryChoice.bind(null, 'person')} value={this.state.storyProperties.personChoice} ref='person'></input></p>
 					</div>
-					<div className={this.state.storyMode.pageThreeLeft ? 'card' : 'hidden card'}>
+					<div className={this.state.storyMode.meanPerson ? 'card' : 'hidden card'}>
+						<p>Uh-oh, that is the mean person!  They hand you an envelope.  You suspect it is filled with poison but you open it anyways.  Inside is {this.state.storyProperties.envelope}.</p>
 					</div>
-					<div className={this.state.storyMode.pageThreeRight ? 'card' : 'hidden card'}>
+					<div className={this.state.storyMode.nicePerson ? 'card' : 'hidden card'}>
+						<p>Huzzah, you chose the nice person!  They give you a present.  Inside is {this.state.storyProperties.present}.</p>
 					</div>
 					<div className={this.state.storyMode.pageFourLeft ? 'card' : 'hidden card'}>
 					</div>
