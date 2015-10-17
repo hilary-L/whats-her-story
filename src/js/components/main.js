@@ -10,7 +10,7 @@ var Main = React.createClass({
 		return (
 				{
 				storyProperties: {
-					name: 'test',
+					name: '',
 					lookingFor: '',
 					leftRoom: '',
 					rightRoom: '',
@@ -19,14 +19,19 @@ var Main = React.createClass({
 					present: '',
 				},
 				storyDisplay: {},
-				codeDisplay: {}
+				codeDisplay: {
+					firstBlock: false,
+					secondBlock: false,
+					thirdBlock: false,
+					fourthBlock: false
+				}
 
 				}
 		)
 
 	},
 
-	handleInput: function(property, event) {
+	handleInput: function(property, block, event) {
 		
 		var storyProperties = {
 			name: '',
@@ -38,10 +43,19 @@ var Main = React.createClass({
 			present: ''
 		}
 
+		var codeDisplay = {
+			firstBlock: false,
+			secondBlock: false,
+			thirdBlock: false,
+			fourthBlock: false,
+		}
+
 		storyProperties[property] = event.target.value;
+		codeDisplay[block] = true;
 
 		this.setState({
 				storyProperties: storyProperties,
+				codeDisplay: codeDisplay
 
 		});
 
@@ -57,8 +71,6 @@ var Main = React.createClass({
 		// Use object dictionary for inputs, handleGetInput: function() {}, var inputObject = {'prop1', 'prop2' }  //
 		// inputObject[nameSentFromInputBind] = the contents of the input //
 		// 
-		
-		console.log(this.state.storyProperties.name);
 
 		return (
 			<div className="container">
@@ -66,10 +78,10 @@ var Main = React.createClass({
 				<div className="view-container">
 					<div className="card">
 						<p>Test paragraph</p>
-						<input type="text" value={this.state.storyProperties.name} onChange={this.handleInput.bind(null, 'name')}></input>
+						<input type="text" value={this.state.storyProperties.name} onChange={this.handleInput.bind(null, 'name', 'firstBlock')}></input>
 						<a href="#" className="btn btn-primary">Button</a>	
 					</div>
-					<CodeBoard />
+					<CodeBoard codeDisplay={this.state.codeDisplay} storyProperties={this.state.storyProperties} />
 				</div>
 			</div>
 

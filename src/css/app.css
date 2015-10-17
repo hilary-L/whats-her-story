@@ -4,6 +4,9 @@ body {
 body .card {
   background-color: #70BF58;
 }
+body .hidden {
+  display: none;
+}
 body .container {
   display: flex;
   flex-wrap: wrap;

@@ -6,7 +6,7 @@ var CodeBoard = React.createClass({
 
 		return (
 			<div className="card">
-				<p>TESTING TESTING!</p>
+				<p className={this.props.codeDisplay.firstBlock ? 'codeblock' : 'codeblock hidden'}>Your character name is {this.props.storyProperties.name}</p>
 			</div>
 
 		)
