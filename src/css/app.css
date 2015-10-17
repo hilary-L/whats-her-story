@@ -1,5 +1,8 @@
 body {
-  background-color: #6FCCDD;
+  background-image: "";
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #fff;
 }
 body .card {
   background-color: #70BF58;
@@ -8,8 +11,6 @@ body .hidden {
   display: none;
 }
 body .container {
-  display: flex;
-  flex-wrap: wrap;
   padding: 2rem;
 }
 body .container .view-container {
@@ -27,4 +28,26 @@ body .container .card.big {
 }
 body .container .card.big .card-block {
   background-color: white;
+}
+
+body, html {
+  min-height: 100%;
+}
+
+.top-header {
+  width: 100%;
+  font: 6em "", cursive;
+  color: #B8B8B8;
+  text-shadow: 3px 3px 3 rgba(0, 0, 0, 0.2);
+  margin: 50px auto;
+  text-align: center;
+}
+
+#navigation {
+  border: 2px solid #B8B8B8;
+  padding: 20px;
+  width: 220px;
+  max-width: 200px;
+  height: 800px;
+  border-radius: 5px;
 }
