@@ -222,8 +222,8 @@ var Main = React.createClass({
 
 		return (
 			<div>
-				<div className={this.state.inputMode ? 'container' : 'container hidden'>
-					<StoryBoard storyDisplay={this.state.storyDisplay} storyProperties={this.state.storyProperties} storyVisible={this.state.storyVisible}/>
+				<div className={this.state.inputMode ? 'container' : 'container hidden'}>
+					<StoryBoard storyDisplay={this.state.storyDisplay} storyProperties={this.state.storyProperties} storyVisible={this.state.storyVisible} />
 					<div className="view-container">
 						<div className={this.state.inputPage.pageOne ? 'card' : 'hidden card'}>
 							<p>What is your character name? <input type="text" value={this.state.storyProperties.name} onChange={this.handleInput.bind(null, 'name', 'firstBlock')}></input></p>
@@ -283,8 +283,9 @@ var Main = React.createClass({
 					</div>
 					<div className={this.state.storyMode.obstacleFailed ? 'card' : 'hidden card'}>
 						<p>OBSTACLE FAILED</p>
+					</div>
 					<div className={this.state.storyMode.pageTwoRight ? 'card' : 'hidden card'}>
-						<p>Congrats you are now in the {this.state.storyProperties.rightRoom}
+						<p>Congrats you are now in the {this.state.storyProperties.rightRoom}</p>
 					</div>
 					<div className={this.state.storyMode.pageThreeLeft ? 'card' : 'hidden card'}>
 					</div>
