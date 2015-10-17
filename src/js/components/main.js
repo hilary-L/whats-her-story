@@ -53,10 +53,10 @@ var Main = React.createClass({
 					inputMode: true,
 					storyMode: false
 				},
-				storyChoices {
+				storyChoices: {
 					choiceOne: ''
 				},
-				storyMode {
+				storyMode: {
 					pageOne: true,
 					pageTwoLeft: false,
 					pageTwoRight: false,
@@ -145,7 +145,7 @@ var Main = React.createClass({
 					});
 				}
 				break;
-			case default: 
+			default: 
 				return true;
 
 		}
