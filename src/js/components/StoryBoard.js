@@ -5,7 +5,10 @@ var StoryBoard = React.createClass({
 	render: function() {
 
 		return (
-			<div>
+			<div className="card big">
+				<div className="card-block">
+					<p>TESTING THE STORYBOARD TESTING TESTING</p>
+				</div>
 			</div>
 
 		)
