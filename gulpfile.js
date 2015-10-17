@@ -34,6 +34,15 @@ gulp.task('copy', function() {
 		.pipe(gulp.dest(path.DEST_CSS));
 	gulp.src(path.JS)
 		.pipe(gulp.dest(path.DEST_BUILD));
+	var watcher = watchify(browserify({
+		entries: [path.ENTRY_POINT],
+		transform: [babelify],
+		debug: true,
+		cache: {}, packageCache: {}, fullPaths: true
+		}));
+	watcher.bundle()
+		.pipe(source(path.OUT))
+		.pipe(gulp.dest(path.DEST_SRC))
 });
 
 gulp.task('watch', function() {
@@ -79,7 +88,7 @@ gulp.task('compass', function() {
 
 });
 
-gulp.task('default', ['copy', 'watch', 'compass', 'connect', 'open']);
+gulp.task('default', ['replaceHTML','copy', 'watch', 'compass', 'connect', 'open']);
 
 gulp.task('build', function() {
 	browserify({
