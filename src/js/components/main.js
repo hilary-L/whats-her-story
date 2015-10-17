@@ -14,6 +14,8 @@ var Main = React.createClass({
 					lookingFor: '',
 					leftRoom: '',
 					rightRoom: '',
+					meanPerson: '',
+					nicePerson: '',
 					treasure: '',
 					envelope: '',
 					present: '',
@@ -102,6 +104,26 @@ var Main = React.createClass({
 					storyVisible: storyVisible
 				});
 				break;
+			case 'pageThree':
+				var storyDisplay = this.state.storyDisplay;
+				var storyVisible = this.state.storyVisible;
+				storyDisplay[page] = 'What we say on page 3';
+				storyVisible[page] = true;
+				this.setState({
+					storyDisplay: storyDisplay,
+					storyVisible: storyVisible
+				});
+				break;
+			case 'pageFour':
+				var storyDisplay = this.state.storyDisplay;
+				var storyVisible = this.state.storyVisible;
+				storyDisplay[page] = 'What we say on page 4';
+				storyVisible[page] = true;
+				this.setState({
+					storyDisplay: storyDisplay,
+					storyVisible: storyVisible
+				});
+				break;
 			default:
 				return true;
 		}
@@ -134,6 +156,17 @@ var Main = React.createClass({
 						<p>What is the setting behind the door to your left? <input type="text" value={this.state.storyProperties.leftRoom} onChange={this.handleInput.bind(null, 'leftRoom', 'secondBlock')}></input></p>
 						<p>What is the setting behind the door to your right? <input type="text" value={this.state.storyProperties.rightRoom} onChange={this.handleInput.bind(null, 'rightRoom', 'secondBlock')}></input></p>
 						<a onClick={this.handleChangePage.bind(null, 'pageThree')} className="btn btn-primary">Next</a>	
+					</div>
+					<div className={this.state.inputPage.pageThree ? 'card' : 'hidden card'}>
+						<p>Okay, let us go back to the door on the right.  Behind that door, {this.state.storyProperties.rightRoom}, there are two people, one mean and one nice.</p>
+						<p>Who is the mean person? <input type="text" value={this.state.storyProperties.meanPerson} onChange={this.handleInput.bind(null, 'meanPerson', 'thirdBlock')}></input></p>
+						<p>Who is the nice person? <input type="text" value={this.state.storyProperties.nicePerson} onChange={this.handleInput.bind(null, 'nicePerson', 'thirdBlock')}></input></p>
+						<a onClick={this.handleChangePage.bind(null, 'pageFour')} className="btn btn-primary">Next</a>	
+					</div>
+					<div className={this.state.inputPage.pageFour ? 'card' : 'hidden card'}>
+						<p>If you talk to the mean person, they hand you an envelope.  You suspect it is full of poison, but just to be sure you open it.  What is inside?  <input type="text" value={this.state.storyProperties.envelope} onChange={this.handleInput.bind(null, 'envelope', 'fourthBlock')}></input></p>
+						<p>If you talk to the nice person, they are delighted to see you!  They give you a present.  What is in the present?  <input type="text" value={this.state.storyProperties.present} onChange={this.handleInput.bind(null, 'present', 'fourthBlock')}></input></p>
+						<a onClick={this.handleChangePage.bind(null, 'pageFive')} className="btn btn-primary">Next</a>	
 					</div>
 					<CodeBoard codeDisplay={this.state.codeDisplay} storyProperties={this.state.storyProperties} />
 				</div>
