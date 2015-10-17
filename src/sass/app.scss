@@ -44,11 +44,12 @@ body, html, app, .card.big, .card-block, .card {
 	}
 
 	.card.big {
-		width: 100%;
-		background-color: #5DC098;
-		border-color:#5DC098;
-		padding: 1rem;
-
+		    width: 100%;
+    background-color: #5DC098;
+    border-color: #5DC098;
+    padding: 1rem;
+    color: black;
+    
 		.card-block {
 			background-color: white;
 		}
@@ -71,12 +72,4 @@ body, html {
 }
 .prettyprint{
 	background:white;
-}
-pre span.pun{
-	&:only-child, &:last-child{
-		&:after{
-			content:'';
-			display:block;
-		}
-	}
 }
