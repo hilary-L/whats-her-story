@@ -133,13 +133,13 @@ var Main = React.createClass({
 			case 'obstacle':
 				var success = Math.floor(Math.random() * 2);
 				if(success == 1) {
-					storyMode[obstacleBeat] = true;
+					storyMode.obstacleBeat = true;
 					this.setState({
 						storyMode: storyMode
 					});
 				}
 				else {
-					storyMode[obstacleFailed] = true;
+					storyMode.obstacleFailed = true;
 					this.setState({
 						storyMode: storyMode
 					});
@@ -269,10 +269,10 @@ var Main = React.createClass({
 						<p>Click the button to see if you beat the obstacle! <button className="btn btn-primary" onClick={this.handleStoryChoice.bind(null, 'obstacle', 'pageThree')}>Find out</button></p>
 					</div>
 					<div className={this.state.storyMode.obstacleBeat ? 'card' : 'hidden card'}>
-						<p>OBSTACLE BEAT</p>
+						<p>Congrats, you defeated the obstacle!  You were magically transported to a castle.  There you found a treasure chest, and in the treasure chest was {this.state.storyProperties.treasure}</p>
 					</div>
 					<div className={this.state.storyMode.obstacleFailed ? 'card' : 'hidden card'}>
-						<p>OBSTACLE FAILED</p>
+						<p>You did not defeat the obstacle.  Instead you were transported to the bottom of the sea, where you saw a glowing cave.  There might still be something cool in the cave, though.  And it was... {this.state.storyProperties.cave}</p>
 					</div>
 					<div className={this.state.storyMode.pageTwoRight ? 'card' : 'hidden card'}>
 						<p>Congrats you are now in the {this.state.storyProperties.rightRoom}</p>
