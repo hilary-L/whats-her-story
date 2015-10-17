@@ -1,3 +1,27 @@
 body {
-  background-color: #eee;
+  background-color: #6FCCDD;
+}
+body .card {
+  background-color: #70BF58;
+}
+body .container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem;
+}
+body .container .view-container {
+  display: flex;
+  flex: 1;
+}
+body .container .view-container .card {
+  flex: 1;
+  margin: 0.5rem;
+}
+body .container .card.big {
+  width: 100%;
+  background-color: #5DC098;
+  padding: 1rem;
+}
+body .container .card.big .card-block {
+  background-color: white;
 }

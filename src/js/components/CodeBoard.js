@@ -5,7 +5,8 @@ var CodeBoard = React.createClass({
 	render: function() {
 
 		return (
-			<div>
+			<div className="card">
+				<p>TESTING TESTING!</p>
 			</div>
 
 		)
