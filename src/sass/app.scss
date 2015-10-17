@@ -63,3 +63,14 @@ body, html {
     border-padding: 50px;
     border-color: #1BA9E1;
 }
+.prettyprint{
+	background:white;
+}
+pre span.pun{
+	&:only-child, &:last-child{
+		&:after{
+			content:'';
+			display:block;
+		}
+	}
+}
