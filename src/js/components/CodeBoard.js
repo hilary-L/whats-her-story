@@ -3,11 +3,12 @@ import React from 'react';
 var CodeBoard = React.createClass({
 	componentDidUpdate: function(){
 		PR.prettyPrint();
+		$('.codestuffs').animate({ scrollTop: 1000000000 }, "slow");
 	},
 	render: function() {
 
 		return (
-			<div className="card">
+			<div className="card codestuffs">
 				<div className={ 'codeblock' }>
 					<pre className='prettyprint'>
 						{'//Below your variables are declared. Variables are used to store information to be used later.\r\n'}
