@@ -1,32 +1,44 @@
 import React from 'react';
 
 var CodeBoard = React.createClass({
-
+	componentDidUpdate: function(){
+		PR.prettyPrint();
+	},
 	render: function() {
 
 		return (
 			<div className="card">
-				<pre className={this.props.codeDisplay.firstBlock ? 'codeblock' : 'codeblock hidden'}>
-					<p>{'var characterName = '} {this.props.storyProperties.name}</p>
-					<p>{'var lookingFor = '} {this.props.storyProperties.lookingFor}</p>
-				</pre>
-				<pre className={this.props.codeDisplay.secondBlock ? 'codeblock' : 'codeblock hidden'}>
-					<p>{'var leftRoom = '} {this.props.storyProperties.leftRoom}</p>
-					<p>{'var rightRoom = '} {this.props.storyProperties.rightRoom}</p>
-				</pre>
-				<pre className={this.props.codeDisplay.thirdBlock ? 'codeblock' : 'codeblock hidden'}>
-					<p>{'var obstacle = '} {this.props.storyProperties.obstacle}</p>
-					<p>{'var treasure = '} {this.props.storyProperties.treasure}</p>
-					<p>{'var cave = '} {this.props.storyProperties.cave}</p>
-				</pre>
-				<pre className={this.props.codeDisplay.fourthBlock ? 'codeblock' : 'codeblock hidden'}>
-					<p>{'var meanPerson = '} {this.props.storyProperties.meanPerson}</p>
-					<p>{'var nicePerson = '} {this.props.storyProperties.nicePerson}</p>
-				</pre>
-				<pre className={this.props.codeDisplay.fifthBlock ? 'codeblock' : 'codeblock hidden'}>
-					<p>{'var envelope = '} {this.props.storyProperties.envelope}</p>
-					<p>{'var present = '} {this.props.storyProperties.present}</p>
-				</pre>
+				<div className={this.props.codeDisplay.firstBlock ? 'codeblock' : 'codeblock hidden'}>
+					<pre className="prettyprint">
+						{'var characterName = '} {this.props.storyProperties.name};
+						{'var lookingFor = '} {this.props.storyProperties.lookingFor};
+					</pre>
+				</div>
+				<div className={this.props.codeDisplay.secondBlock ? 'codeblock' : 'codeblock hidden'}>
+					<pre className="prettyprint">
+						{'var leftRoom = '} {this.props.storyProperties.leftRoom};
+						{'var rightRoom = '} {this.props.storyProperties.rightRoom};
+					</pre>
+				</div>
+				<div className={this.props.codeDisplay.thirdBlock ? 'codeblock' : 'codeblock hidden'}>
+					<pre className="prettyprint">
+						{'var obstacle = '} {this.props.storyProperties.obstacle};
+						{'var treasure = '} {this.props.storyProperties.treasure};
+						{'var cave = '} {this.props.storyProperties.cave};
+					</pre>
+				</div>
+				<div className={this.props.codeDisplay.fourthBlock ? 'codeblock' : 'codeblock hidden'}>
+					<pre className="prettyprint">
+						{'var meanPerson = '} {this.props.storyProperties.meanPerson};
+						{'var nicePerson = '} {this.props.storyProperties.nicePerson};
+					</pre>
+				</div>
+				<div className={this.props.codeDisplay.fifthBlock ? 'codeblock' : 'codeblock hidden'}>
+					<pre className="prettyprint">
+						{'var envelope = '} {this.props.storyProperties.envelope};
+						{'var present = '} {this.props.storyProperties.present};
+					</pre>
+				</div>
 			</div>
 
 		)
