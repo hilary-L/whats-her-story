@@ -9,12 +9,43 @@ var Main = React.createClass({
 
 		return (
 				{
-				storyProperties: {},
+				storyProperties: {
+					name: 'test',
+					lookingFor: '',
+					leftRoom: '',
+					rightRoom: '',
+					treasure: '',
+					envelope: '',
+					present: '',
+				},
 				storyDisplay: {},
 				codeDisplay: {}
 
 				}
 		)
+
+	},
+
+	handleInput: function(property, event) {
+		
+		var storyProperties = {
+			name: '',
+			lookingFor: '',
+			leftRoom: '',
+			rightRoom: '',
+			treasure: '',
+			envelope: '',
+			present: ''
+		}
+
+		storyProperties[property] = event.target.value;
+
+		this.setState({
+				storyProperties: storyProperties,
+
+		});
+
+
 
 	},
 
@@ -25,6 +56,9 @@ var Main = React.createClass({
 		// Two child components, story view and code view. Will be siblings. //
 		// Use object dictionary for inputs, handleGetInput: function() {}, var inputObject = {'prop1', 'prop2' }  //
 		// inputObject[nameSentFromInputBind] = the contents of the input //
+		// 
+		
+		console.log(this.state.storyProperties.name);
 
 		return (
 			<div className="container">
@@ -32,6 +66,7 @@ var Main = React.createClass({
 				<div className="view-container">
 					<div className="card">
 						<p>Test paragraph</p>
+						<input type="text" value={this.state.storyProperties.name} onChange={this.handleInput.bind(null, 'name')}></input>
 						<a href="#" className="btn btn-primary">Button</a>	
 					</div>
 					<CodeBoard />
