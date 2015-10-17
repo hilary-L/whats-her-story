@@ -7,7 +7,7 @@ var StoryBoard = React.createClass({
 		return (
 			<div className="card big">
 				<div className="card-block">
-					<p>TESTING THE STORYBOARD TESTING TESTING</p>
+					<p className={this.props.storyVisible.pageTwo ? 'story-block' : 'story-block hidden'}>{this.props.storyDisplay.pageTwo}</p>
 				</div>
 			</div>
 
