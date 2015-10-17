@@ -10,10 +10,11 @@ body, html, app, .card.big, .card-block, .card {
 	background-color:$backgroundColor;
 	border-radius:20px;
 	padding: 20px;
-
+	}
 	.card {
 		background-color: #70BF58;
 		border-color: #70BF58;
+		max-height: 500px;
 		color: white;
 			input{
 				border-radius: 20px;
@@ -21,11 +22,9 @@ body, html, app, .card.big, .card-block, .card {
 				color: black;
 			}
 	}
-
 	.hidden {
 		display: none !important;
 	}
-
 	.container {
 		padding: 2rem;
 
@@ -52,16 +51,19 @@ body, html, app, .card.big, .card-block, .card {
 			}
 		}
 	}
+pre {
+	max-width: 100%;
+    word-wrap: break-word;
 }
-
 body, html {
 	min-height:100%;
 }
 .container {
 	background-color: #6FCCDD;
+	border-color: #6FCCDD;
     border-radius: 20px;
     border-style: solid;
     border-width: 10px;
     border-padding: 50px;
-    border-color: #6FCCDD;
+    
     }

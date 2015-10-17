@@ -53,10 +53,10 @@ var Main = React.createClass({
 					inputMode: true,
 					storyMode: false
 				},
-				storyChoices {
+				storyChoices: {
 					choiceOne: ''
 				},
-				storyMode {
+				storyMode: {
 					pageOne: true,
 					pageTwoLeft: false,
 					pageTwoRight: false,
@@ -133,19 +133,19 @@ var Main = React.createClass({
 			case 'obstacle':
 				var success = Math.floor(Math.random() * 2);
 				if(success == 1) {
-					storyMode[obstacleBeat] = true;
+					storyMode.obstacleBeat = true;
 					this.setState({
 						storyMode: storyMode
 					});
 				}
 				else {
-					storyMode[obstacleFailed] = true;
+					storyMode.obstacleFailed = true;
 					this.setState({
 						storyMode: storyMode
 					});
 				}
 				break;
-			case default: 
+			default: 
 				return true;
 
 		}
@@ -204,6 +204,7 @@ var Main = React.createClass({
 					}
 				});
 				console.log(this.state.mode);
+				break;
 			default:
 				return true;
 		}
@@ -222,8 +223,8 @@ var Main = React.createClass({
 
 		return (
 			<div>
-				<div className={this.state.inputMode ? 'container' : 'container hidden'>
-					<StoryBoard storyDisplay={this.state.storyDisplay} storyProperties={this.state.storyProperties} storyVisible={this.state.storyVisible}/>
+				<div className={this.state.mode.inputMode ? 'container' : 'container hidden'}>
+					<StoryBoard storyDisplay={this.state.storyDisplay} storyProperties={this.state.storyProperties} storyVisible={this.state.storyVisible} />
 					<div className="view-container">
 						<div className={this.state.inputPage.pageOne ? 'card' : 'hidden card'}>
 							<p>What is your character name? <input type="text" value={this.state.storyProperties.name} onChange={this.handleInput.bind(null, 'name', 'firstBlock')}></input></p>
@@ -235,17 +236,6 @@ var Main = React.createClass({
 							<p>What is the setting behind the door to your left? <input type="text" value={this.state.storyProperties.leftRoom} onChange={this.handleInput.bind(null, 'leftRoom', 'secondBlock')}></input></p>
 							<p>What is the setting behind the door to your right? <input type="text" value={this.state.storyProperties.rightRoom} onChange={this.handleInput.bind(null, 'rightRoom', 'secondBlock')}></input></p>
 							<a onClick={this.handleChangePage.bind(null, 'pageThree')} className="btn btn-primary">Next</a>	
-						</div>
-						<div className={this.state.inputPage.pageThree ? 'card' : 'hidden card'}>
-							<p>Okay, let us go back to the door on the right.  Behind that door, {this.state.storyProperties.rightRoom}, there are two people, one mean and one nice.</p>
-							<p>Who is the mean person? <input type="text" value={this.state.storyProperties.meanPerson} onChange={this.handleInput.bind(null, 'meanPerson', 'thirdBlock')}></input></p>
-							<p>Who is the nice person? <input type="text" value={this.state.storyProperties.nicePerson} onChange={this.handleInput.bind(null, 'nicePerson', 'thirdBlock')}></input></p>
-							<a onClick={this.handleChangePage.bind(null, 'pageFour')} className="btn btn-primary">Next</a>	
-						</div>
-						<div className={this.state.inputPage.pageFour ? 'card' : 'hidden card'}>
-							<p>If you talk to the mean person, they hand you an envelope.  You suspect it is full of poison, but just to be sure you open it.  What is inside?  <input type="text" value={this.state.storyProperties.envelope} onChange={this.handleInput.bind(null, 'envelope', 'fourthBlock')}></input></p>
-							<p>If you talk to the nice person, they are delighted to see you!  They give you a present.  What is in the present?  <input type="text" value={this.state.storyProperties.present} onChange={this.handleInput.bind(null, 'present', 'fourthBlock')}></input></p>
-							<a onClick={this.handleChangePage.bind(null, 'pageFive')} className="btn btn-primary">Next</a>	
 						</div>
 						<div className={this.state.inputPage.pageThree ? 'card' : 'hidden card'}>
 							<p>Behind the door to your left, the {this.state.storyProperties.leftRoom}, there is an obstacle!  What is it? <input type="text" value={this.state.storyProperties.obstacle} onChange={this.handleInput.bind(null, 'obstacle', 'thirdBlock')}></input></p>
@@ -279,12 +269,13 @@ var Main = React.createClass({
 						<p>Click the button to see if you beat the obstacle! <button className="btn btn-primary" onClick={this.handleStoryChoice.bind(null, 'obstacle', 'pageThree')}>Find out</button></p>
 					</div>
 					<div className={this.state.storyMode.obstacleBeat ? 'card' : 'hidden card'}>
-						<p>OBSTACLE BEAT</p>
+						<p>Congrats, you defeated the obstacle!  You were magically transported to a castle.  There you found a treasure chest, and in the treasure chest was {this.state.storyProperties.treasure}</p>
 					</div>
 					<div className={this.state.storyMode.obstacleFailed ? 'card' : 'hidden card'}>
-						<p>OBSTACLE FAILED</p>
+						<p>You did not defeat the obstacle.  Instead you were transported to the bottom of the sea, where you saw a glowing cave.  There might still be something cool in the cave, though.  And it was... {this.state.storyProperties.cave}</p>
+					</div>
 					<div className={this.state.storyMode.pageTwoRight ? 'card' : 'hidden card'}>
-						<p>Congrats you are now in the {this.state.storyProperties.rightRoom}
+						<p>Congrats you are now in the {this.state.storyProperties.rightRoom}</p>
 					</div>
 					<div className={this.state.storyMode.pageThreeLeft ? 'card' : 'hidden card'}>
 					</div>
