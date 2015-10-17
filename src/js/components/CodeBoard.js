@@ -7,13 +7,14 @@ var CodeBoard = React.createClass({
 		return (
 			<div className="card">
 				<pre className={ 'codeblock' }>
-					<p>{'//Below your variables are declared. Variables are used to store information to be used later'}</p>
+					<p>{'//Below your variables are declared. Variables are used to store information to be used later.'}</p>
 					<p>{'var characterName = '} {this.props.storyProperties.name}</p>
 					<p>{'var lookingFor = '} {this.props.storyProperties.lookingFor}</p>
 				</pre>
 				<pre className={(this.props.codeDisplay.secondBlock || this.props.codeDisplay.thirdBlock || this.props.codeDisplay.fourthBlock || this.props.codeDisplay.fifthBlock) ? 'codeblock' : 'codeblock hidden'}>
 					<p>{'var leftRoom = '} {this.props.storyProperties.leftRoom}</p>
 					<p>{'var rightRoom = '} {this.props.storyProperties.rightRoom}</p>
+					<p>{'//Below is a conditional statement. If the user inputs "LEFT", then the setting variable is changed to leftRoom. Otherwise, the setting variable is set to rightRoom'}</p>
 					<p>{'if userInput == LEFT'}</p>
 					<p>{'    setting = leftRoom'}</p>
 					<p>{'else'}</p>
