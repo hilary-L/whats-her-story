@@ -20,7 +20,8 @@ var Main = React.createClass({
 					meanPerson: '',
 					nicePerson: '',
 					envelope: '',
-					present: ''
+					present: '',
+					personChoice: ''
 				},
 				inputPage: {
 					pageOne: true,
@@ -143,6 +144,27 @@ var Main = React.createClass({
 					this.setState({
 						storyMode: storyMode
 					});
+				}
+				break;
+			case 'person':
+				console.log(this.state);
+				console.log('The nice person: ' + this.state.storyProperties.nicePerson);
+				console.log('The mean person: ' + this.state.storyProperties.meanPerson);
+				var personChoice = React.findDOMNode(this.refs.person).value.trim();
+				console.log('Your input: ' + personChoice);
+
+				var storyProperties = this.state.storyProperties;
+				storyProperties.personChoice = personChoice;
+				
+				this.setState({
+					storyProperties: storyProperties
+				});
+				console.log(this.state.storyProperties.personChoice);
+				if(personChoice == this.state.storyProperties.nicePerson) {
+					console.log("the nice person!");
+				}
+				else if(personChoice == this.state.storyProperties.meanPerson) {
+					console.log("the mean person!");
 				}
 				break;
 			default: 
@@ -275,7 +297,8 @@ var Main = React.createClass({
 						<p>You did not defeat the obstacle.  Instead you were transported to the bottom of the sea, where you saw a glowing cave.  There might still be something cool in the cave, though.  And it was... {this.state.storyProperties.cave}</p>
 					</div>
 					<div className={this.state.storyMode.pageTwoRight ? 'card' : 'hidden card'}>
-						<p>Congrats you are now in the {this.state.storyProperties.rightRoom}</p>
+						<p>In this room, the {this.state.storyProperties.rightRoom}, there are two people. One is mean and one is nice - but who is who?! Well maybe you can figure it out. One is {this.state.storyProperties.nicePerson} and one is {this.state.storyProperties.meanPerson}.</p>
+						<p>Which do you choose? Type in thier name <input type='text' onChange={this.handleStoryChoice.bind(null, 'person')} value={this.state.storyProperties.personChoice} ref='person'></input></p>
 					</div>
 					<div className={this.state.storyMode.pageThreeLeft ? 'card' : 'hidden card'}>
 					</div>

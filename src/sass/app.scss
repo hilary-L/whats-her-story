@@ -10,47 +10,50 @@ body, html, app, .card.big, .card-block, .card {
 	background-color:$backgroundColor;
 	border-radius:20px;
 	padding: 20px;
+}
+.card {
+	background-color: #70BF58;
+	border-color: #70BF58;
+	max-height: 500px;
+	overflow:auto;
+	color: white;
+	input{
+		border-radius: 20px;
+		padding:0 .5em;
+		outline: 0;
+		color: black;
+		max-width:100%;
 	}
-	.card {
-		background-color: #70BF58;
-		border-color: #70BF58;
-		max-height: 500px;
-		color: white;
-			input{
-				border-radius: 20px;
-				outline: 0;
-				color: black;
-			}
-	}
-	.hidden {
-		display: none !important;
-	}
-	.container {
-		padding: 2rem;
+}
+.hidden {
+	display: none !important;
+}
+.container {
+	padding: 2rem;
 
-		.view-container {
-			display: flex;
+	.view-container {
+		display: flex;
+		flex: 1;
+
+		.card {
 			flex: 1;
-
-			.card {
-				flex: 1;
-				margin: 0.5rem;
+			margin: 0.5rem;
 
 
-			}
-		}
-
-		.card.big {
-			width: 100%;
-			background-color: #5DC098;
-			border-color:#5DC098;
-			padding: 1rem;
-
-			.card-block {
-				background-color: white;
-			}
 		}
 	}
+
+	.card.big {
+		width: 100%;
+		background-color: #5DC098;
+		border-color:#5DC098;
+		padding: 1rem;
+
+		.card-block {
+			background-color: white;
+		}
+	}
+}
 pre {
 	max-width: 100%;
     word-wrap: break-word;
@@ -65,5 +68,15 @@ body, html {
     border-style: solid;
     border-width: 10px;
     border-padding: 50px;
-    
-    }
+}
+.prettyprint{
+	background:white;
+}
+pre span.pun{
+	&:only-child, &:last-child{
+		&:after{
+			content:'';
+			display:block;
+		}
+	}
+}
