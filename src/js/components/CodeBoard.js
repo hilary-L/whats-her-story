@@ -27,12 +27,17 @@ var CodeBoard = React.createClass({
 						{'    setting = rightRoom;'}
 						{'}'}
 					</pre>
-
 				</div>
 				<div className={(this.props.codeDisplay.thirdBlock || this.props.codeDisplay.fourthBlock || this.props.codeDisplay.fifthBlock) ? 'codeblock' : 'codeblock hidden'}>
 					<pre className='prettyprint'>
 						{'var obstacle = '} {this.props.storyProperties.obstacle || '_____'};
-						{'var treasure = '} {this.props.storyProperties.treasure || '_____'};
+						{'// The treasure chest is an object. Objects can have properties.\r\n'}
+						{'var treasureChest = {'}
+						{'      // The first property is the treasure variable.\r\n'}
+						{'      treasure: '} {this.props.storyProperties.treasure || '_____'},
+						{'      // isEmpty is a boolean. Booleans have either a true or false value.\r\n'}
+						{'      isEmpty: false'},
+						{'}'};
 						{'var cave = '} {this.props.storyProperties.cave || '_____'};
 					</pre>
 				</div>
