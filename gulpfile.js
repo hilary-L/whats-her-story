@@ -17,7 +17,7 @@ var path = {
 	HTML: 'src/index.html',
 	CSS: 'src/css/*.css',
 	JS: 'src/js/*.js',
-	SASS: 'src/sass/app.scss',
+	SASS: ['src/sass/*.scss', 'src/sass/**/*.scss'],
 	MINIFIED_OUT: 'build.min.js',
 	OUT: 'build.js',
 	DEST: 'public',
@@ -73,19 +73,22 @@ gulp.task('connect', function() {
     root: 'public',
     port: port
   });
+  gulp.watch(path.DEST + '/**/*', ['reload']);
   console.log(('WhatsHerStory listening on port ' + port).rainbow);
 });
+gulp.task('reload', function(){
+	gulp.src(path.DEST).pipe(connect.reload());
+})
 
 gulp.task('compass', function() {
 
-	gulp.src('./src/sass/*.scss')
+	gulp.src(path.SASS)
 		.pipe(compass({
 			config_file: './config.rb',
 			css: 'src/css',
 			sass: 'src/sass'
 			}))
 		.pipe(gulp.dest(path.DEST_CSS));
-
 });
 
 gulp.task('default', ['replaceHTML','copy', 'watch', 'compass', 'connect', 'open']);
